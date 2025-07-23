@@ -2,25 +2,26 @@
 
 /* Root variables for consistent color palette across light/dark mode */
 :root {
-    --bg: #e6fffb;
-    --text: #000;
-    --card: #fff;
-    --accent-purple: #a18cd1;
-    --accent-pink: #fbc2eb;
+    --accent-purple: #a18cd1; /* Accent color */
+    --accent-pink: #fbc2eb;   /* Accent color */
 }
 
-body.dark {
-    --bg: #1a1a1a;
-    --text: #f5f5f5;
-    --card: #2a2a2a;
-    /* Tailwind's dark mode classes will override most of these, but they are here for consistency */
-}
-
-/* Base body styles (some might be overridden by Tailwind utility classes in HTML) */
+/* Base body styles for light mode */
 body {
     font-family: 'Segoe UI', sans-serif;
     scroll-behavior: smooth;
+    background-color: #f9fafb; /* Light background: Tailwind's gray-50 */
+    color: #1f2937; /* Dark text: Tailwind's gray-900 */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for base colors */
 }
+
+/* Styles applied to the body when the 'dark' class is on the html element */
+html.dark body {
+    background-color: #111827; /* Dark background: Tailwind's gray-900 */
+    color: #f3f4f6; /* Light text: Tailwind's gray-100 */
+}
+
+/* --- Animations (remain unchanged) --- */
 
 /* Custom animation for profile image glow */
 @keyframes pulse-glow {
@@ -39,7 +40,7 @@ body {
     animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* Fade in animation for sections */
+/* Fade in animation for sections (Hero, About, Projects, Contact) */
 @keyframes fade-in {
     from {
         opacity: 0;
@@ -65,8 +66,10 @@ body {
     }
 }
 
-.animate-fade-in-up {
+/* This class is applied to the main section container in each HTML file */
+section[id] { /* Targets any section with an ID for animation */
     animation: fade-in-up 0.8s ease-out forwards;
+    opacity: 0; /* Hidden by default, animated by JS */
 }
 
 /* Skill item slide-in animation */
